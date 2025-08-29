@@ -1,0 +1,27 @@
+app/
+├── layout.tsx                             ← ルートレイアウト
+├── page.tsx                               ← トップページ（未ログインは /login へ）
+├── login/
+│   └── page.tsx                           ← ログインページ（サインアップモーダル）
+│
+├── (protected)/                           ← 認証済みページをまとめるルートグループ
+│   ├── layout.tsx                         ← サイドバーありレイアウト
+│   ├── u/
+│   │   └── [userId]/
+│   │       ├── page.tsx                   ← ユーザープロフィール
+│   │       ├── boards/page.tsx            ← ユーザーの全ボード
+│   │       └── cards/page.tsx             ← ユーザーの全カード
+│   │
+│   ├── w/
+│   │   └── [workspaceId]/
+│   │       ├── page.tsx                   ← ワークスペースのボード一覧
+│   │       └── member/page.tsx            ← メンバー一覧
+│   │
+│   ├── b/
+│   │   └── [boardId]/
+│   │       ├── page.tsx                   ← カンバン表示
+│   │       ├── boards/page.tsx            ← テーブル表示
+│   │       └── cards/page.tsx             ← ダッシュボード表示
+│   │
+│   └── c/
+│       └── [cardId]/page.tsx              ← カード単体URL（モーダル）

@@ -1,0 +1,25 @@
+トップページ /page.tsx
+├─ 未ログイン → /login へリダイレクト
+└─ ログイン済み → /u/[userId]/ へリダイレクト
+
+未認証ページ
+├─ /login
+│   └─ サインアップモーダル
+
+(protected) 認証済みページ
+├─ ユーザー /u/[userId]
+│   ├─ page.tsx          (プロフィール・公開範囲)
+│   ├─ boards/           (ユーザーの全ボード一覧)
+│   └─ cards/            (ユーザーの全カード一覧)
+│
+├─ ワークスペース /w/[workspaceId]
+│   ├─ page.tsx          (ボード一覧)
+│   └─ member/page.tsx   (アクセス可能なユーザー一覧)
+│
+├─ ボード /b/[boardId]
+│   ├─ page.tsx          (カンバン表示)
+│   ├─ boards/           (テーブル表示)
+│   └─ cards/            (ダッシュボード表示)
+│
+└─ カード単体URL /c/[cardId]
+    └─ page.tsx          (モーダル表示)
