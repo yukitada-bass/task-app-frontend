@@ -1,9 +1,9 @@
 import {
-  Calendar,
+  Activity,
   ChevronDown,
+  CircleUser,
   Home,
-  Inbox,
-  Search,
+  LayoutList,
   Settings,
 } from "lucide-react";
 import {
@@ -15,6 +15,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import {
   Collapsible,
@@ -34,7 +35,7 @@ export async function AppSidebar() {
   const workspaces = await res.json();
 
   return (
-    <Sidebar>
+    <Sidebar className="rounded-2xl shadow-md p-4" collapsible="none">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
@@ -42,15 +43,39 @@ export async function AppSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <a href="">
-                    <Home />
-                    <span>ホーム</span>
+                    <CircleUser />
+                    <span>プロフィールと公開範囲</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <a href="">
+                    <Settings />
+                    <span>設定</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <a href="">
+                    <Activity />
+                    <span>アクティビティログ</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <a href="">
+                    <LayoutList />
+                    <span>カード</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <div className="p-4">ワークスペース</div>
+        <SidebarSeparator />
         {workspaces.map((w) => (
           <Collapsible defaultOpen className="group/collapsible" key={w.id}>
             <SidebarGroup>
