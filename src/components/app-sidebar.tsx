@@ -90,7 +90,7 @@ export async function AppSidebar() {
                   <SidebarMenu>
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild>
-                        <a href={`/w/${w.id}/boards`}>
+                        <a href={`/w/${w.id}`}>
                           <Home />
                           <span>ボード</span>
                         </a>
