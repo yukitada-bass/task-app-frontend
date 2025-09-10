@@ -22,17 +22,15 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { serverFetch } from "@/lib/serverFetch";
+import { decrypt } from "@/lib/session";
 import { cookies } from "next/headers";
 
 export async function AppSidebar() {
-  const cookieHeader = cookies().toString();
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/workspaces`, {
-    credentials: "include",
-    headers: {
-      cookie: cookieHeader,
-    },
-  });
-  const workspaces = await res.json();
+  const accessToken = await cookies().then((c) => c.get("access_token")?.value);
+  const { sub: userId } = await decrypt(accessToken);
+  console.log(userId);
+  const workspaces = await serverFetch("/workspaces");
 
   return (
     <Sidebar className="rounded-2xl shadow-md p-4" collapsible="none">
@@ -42,7 +40,7 @@ export async function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="">
+                  <a href={`/u/${userId}`}>
                     <CircleUser />
                     <span>プロフィールと公開範囲</span>
                   </a>
@@ -50,7 +48,7 @@ export async function AppSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="">
+                  <a href={`/u/${userId}/cards`}>
                     <Settings />
                     <span>設定</span>
                   </a>
@@ -58,7 +56,7 @@ export async function AppSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="">
+                  <a href={`/u/${userId}/cards`}>
                     <Activity />
                     <span>アクティビティログ</span>
                   </a>
@@ -66,7 +64,7 @@ export async function AppSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="">
+                  <a href={`/u/${userId}/cards`}>
                     <LayoutList />
                     <span>カード</span>
                   </a>
