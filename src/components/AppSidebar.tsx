@@ -27,9 +27,11 @@ import { decrypt } from "@/lib/session";
 import { cookies } from "next/headers";
 
 export async function AppSidebar() {
-  const accessToken = await cookies().then((c) => c.get("access_token")?.value);
-  const { sub: userId } = await decrypt(accessToken);
-  console.log(userId);
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access_token")?.value;
+  const payload = await decrypt(accessToken);
+  const userId = payload?.sub;
+
   const workspaces = await serverFetch("/workspaces");
 
   return (

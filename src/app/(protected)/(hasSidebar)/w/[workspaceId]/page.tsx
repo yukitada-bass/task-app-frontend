@@ -1,5 +1,6 @@
 import Boards from "@/components/boards/Boards";
 import CreateBoard from "@/components/boards/CreateBoard";
+import Grid from "@/components/ui/grid";
 import { serverFetch } from "@/lib/serverFetch";
 import { Board } from "@/types/board";
 import { Workspace } from "@/types/workspace";
@@ -18,9 +19,9 @@ export default async function page({
   ]);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+    <Grid>
       <Boards boards={boards} />
       <CreateBoard workspaces={workspaces} />
-    </div>
+    </Grid>
   );
 }
